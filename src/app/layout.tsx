@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`scroll-smooth scroll-pt-[100px] ${workSans.variable}`}>
       <body className="min-h-screen overflow-x-hidden custom-scrollbar-hidden antialiased flex justify-center">
-        <div className="w-full max-w-[402px] min-h-screen shadow-custom">
+        <div className="w-full sm:max-w-[402px] min-h-screen shadow-custom">
           {children}
         </div>
       </body>
