@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@sentool/fetch-event-source':
+        specifier: ^0.6.0
+        version: 0.6.0
       '@supabase/ssr':
         specifier: ^0.8.0
         version: 0.8.0(@supabase/supabase-js@2.84.0)
@@ -413,6 +416,9 @@ packages:
 
   '@rtsao/scc@1.1.0':
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
+
+  '@sentool/fetch-event-source@0.6.0':
+    resolution: {integrity: sha512-+11p1xjUoaYACKOwY5nBuN6NU9fiPp8pDaDWxUQ/ycY/IgRjieCYXCY61whM3FmmMPhc9GMfNnQJ/MWOG0EpaQ==}
 
   '@supabase/auth-js@2.84.0':
     resolution: {integrity: sha512-J6XKbqqg1HQPMfYkAT9BrC8anPpAiifl7qoVLsYhQq5B/dnu/lxab1pabnxtJEsvYG5rwI5HEVEGXMjoQ6Wz2Q==}
@@ -2309,6 +2315,8 @@ snapshots:
   '@nolyfill/is-core-module@1.0.39': {}
 
   '@rtsao/scc@1.1.0': {}
+
+  '@sentool/fetch-event-source@0.6.0': {}
 
   '@supabase/auth-js@2.84.0':
     dependencies:
