@@ -179,6 +179,17 @@ export default function RegisterPage() {
     );
   }
 
+  const handleResendOtp = async () => {
+    setError("");
+    setLoading(true);
+    const formattedPhone = `+62${phoneNumber}`;
+    const result = await sendOTP(formattedPhone, fullName);
+    if (!result.success) {
+      setError(result.message);
+    }
+    setLoading(false);
+  };
+
   if (step === "otp") {
     return (
       <OtpForm
@@ -189,6 +200,7 @@ export default function RegisterPage() {
         onBack={handleBack}
         onOtpChange={handleOtpChange}
         onOtpKeyDown={handleOtpKeyDown}
+        onResendOtp={handleResendOtp}
       />
     );
   }
