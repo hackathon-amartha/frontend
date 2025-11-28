@@ -39,21 +39,27 @@ const faqDataMap: Record<FAQType, FAQItem[]> = {
   modal: [
     {
       id: "modal-1",
-      question: "Bagaimana cara mengajukan pinjaman modal?",
+      question: "Apa itu majelis?",
       answer:
-        "Anda dapat mengajukan pinjaman modal melalui aplikasi dengan mengisi formulir pengajuan, melengkapi dokumen yang diperlukan, dan menunggu proses verifikasi. Tim kami akan menghubungi Anda dalam 1-2 hari kerja.",
+        "Merujuk model pembiayaan Group Lending dan konsep Grameen Bank, calon penerima pinjaman perorangan diwajibkan membentuk satu kelompok kecil beranggotakan lima orang, lalu bergabung ke satu majelis besar berisi 15-20 orang. Seluruhnya sepakat melakukan tanggung renteng atau menanggung risiko bersama-sama bila salah satu anggota kelompoknya mengalami gagal bayar. Kualitas anggota terjaga, karena setiap penerima pinjaman saling mengawasi kredibilitas satu sama lain.",
     },
     {
       id: "modal-2",
-      question: "Berapa lama proses pencairan dana modal?",
+      question: "Keuntungan dan tanggung jawab pembuat majelis",
       answer:
-        "Setelah pengajuan disetujui, dana akan dicairkan dalam waktu 24-48 jam ke rekening yang terdaftar. Pastikan data rekening Anda sudah benar untuk menghindari keterlambatan.",
+        "Merujuk model pembiayaan Group Lending dan konsep Grameen Bank, calon penerima pinjaman perorangan diwajibkan membentuk satu kelompok kecil beranggotakan lima orang, lalu bergabung ke satu majelis besar berisi 15-20 orang. Seluruhnya sepakat melakukan tanggung renteng atau menanggung risiko bersama-sama bila salah satu anggota kelompoknya mengalami gagal bayar. Kualitas anggota terjaga, karena setiap penerima pinjaman saling mengawasi kredibilitas satu sama lain.",
     },
     {
       id: "modal-3",
-      question: "Apa saja persyaratan untuk mengajukan pinjaman modal?",
+      question: "Cara gabung ke majelis",
       answer:
-        "Persyaratan utama meliputi: KTP yang masih berlaku, usia minimal 21 tahun, memiliki usaha aktif, dan rekening bank aktif. Dokumen tambahan mungkin diperlukan tergantung jumlah pinjaman.",
+        "Merujuk model pembiayaan Group Lending dan konsep Grameen Bank, calon penerima pinjaman perorangan diwajibkan membentuk satu kelompok kecil beranggotakan lima orang, lalu bergabung ke satu majelis besar berisi 15-20 orang. Seluruhnya sepakat melakukan tanggung renteng atau menanggung risiko bersama-sama bila salah satu anggota kelompoknya mengalami gagal bayar. Kualitas anggota terjaga, karena setiap penerima pinjaman saling mengawasi kredibilitas satu sama lain.",
+    },
+    {
+      id: "modal-4",
+      question: "Apa syarat & ketentuan pengajuan modal",
+      answer:
+        "Merujuk model pembiayaan Group Lending dan konsep Grameen Bank, calon penerima pinjaman perorangan diwajibkan membentuk satu kelompok kecil beranggotakan lima orang, lalu bergabung ke satu majelis besar berisi 15-20 orang. Seluruhnya sepakat melakukan tanggung renteng atau menanggung risiko bersama-sama bila salah satu anggota kelompoknya mengalami gagal bayar. Kualitas anggota terjaga, karena setiap penerima pinjaman saling mengawasi kredibilitas satu sama lain.",
     },
   ],
   amartha: [
