@@ -141,7 +141,7 @@ export default function RegisterPage() {
         const result = await createPin(pinValue);
 
         if (result.success) {
-          router.push("/dashboard");
+          router.push("/onboarding");
           router.refresh();
         } else {
           setError(result.message);
