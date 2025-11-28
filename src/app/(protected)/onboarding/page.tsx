@@ -41,11 +41,11 @@ export default function OnboardingPage() {
   const getProductRoute = (product: ProductType): string => {
     switch (product) {
       case "Modal":
-        return "/modal";
+        return "/dashboard/modal";
       case "Celengan":
-        return "/celengan";
+        return "/dashboard/celengan";
       case "AmarthaLink":
-        return "/amartha-link";
+        return "/dashboard/amartha-link";
       default:
         return "/dashboard";
     }

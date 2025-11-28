@@ -15,7 +15,6 @@ export default function ChatPage() {
     messages,
     threads,
     currentThreadId,
-    currentThreadTitle,
     isLoading,
     isStreaming,
     error,

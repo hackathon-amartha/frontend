@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { loginWithPhoneAndPin } from "@/services/auth";
+import { getRecommendation } from "@/services/recommendation";
 import { PhoneForm, PinForm } from "@/modules/login";
 
 type Step = "phone" | "pin";
@@ -68,7 +69,14 @@ export default function Home() {
         const result = await loginWithPhoneAndPin(formattedPhone, pinValue);
 
         if (result.success) {
-          router.push("/dashboard");
+          // Check if user has recommendation
+          const { recommendation } = await getRecommendation();
+
+          if (recommendation) {
+            router.push("/dashboard");
+          } else {
+            router.push("/onboarding");
+          }
           router.refresh();
         } else {
           setError(result.message);
