@@ -42,7 +42,7 @@ export function PinForm({
           )}
 
           <p className="text-[#853491] font-medium">
-            {loading ? "Loading..." : "Buat PIN"}
+            Masukan PIN untuk akun Anda
           </p>
 
           <div className="flex gap-3.5">
@@ -61,6 +61,11 @@ export function PinForm({
               />
             ))}
           </div>
+
+          <p className="text-[#853491] font-medium text-center">
+            Jangan lupa untuk catat PIN  <br /> yang telah Anda buat !
+          </p>
+
         </div>
       </div>
     </div>
