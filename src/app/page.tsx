@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { Input } from "@/components/ui/input";
+import { PhoneInput } from "@/components/ui/phone-input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { loginWithPhoneAndPin } from "@/services/auth";
@@ -19,16 +19,8 @@ export default function Home() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    if (value === "" || /^\+?\d*$/.test(value)) {
-      setPhoneNumber(value);
-    }
-  };
-
   const validatePhoneNumber = (phone: string): boolean => {
-    const digits = phone.replace(/\+/g, "");
-    return digits.length >= 10 && digits.length <= 15;
+    return phone.length >= 9 && phone.length <= 13;
   };
 
   const handleBack = () => {
@@ -82,14 +74,7 @@ export default function Home() {
 
     setLoading(true);
 
-    let formattedPhone = phoneNumber;
-    if (phoneNumber.startsWith("+")) {
-      formattedPhone = phoneNumber;
-    } else if (phoneNumber.startsWith("0")) {
-      formattedPhone = `+62${phoneNumber.slice(1)}`;
-    } else {
-      formattedPhone = `+62${phoneNumber}`;
-    }
+    const formattedPhone = `+62${phoneNumber}`;
 
     const result = await loginWithPhoneAndPin(formattedPhone, pinValue);
 
@@ -136,12 +121,10 @@ export default function Home() {
               <label className="text-[#853491] text-lg">
                 Nomor Telepon
               </label>
-              <Input
-                type="tel"
+              <PhoneInput
                 value={phoneNumber}
-                onChange={handlePhoneChange}
-                placeholder="+6281234654851"
-                className="rounded-[20px] bg-[#E5E5EA] border-none h-[42px]"
+                onChange={setPhoneNumber}
+                placeholder="81234654851"
               />
             </div>
 
@@ -173,7 +156,7 @@ export default function Home() {
         >
           <ArrowLeft className="size-6"/>
         </button>
-        <span className="text-[#853491] font-medium text-lg">PIN</span>
+        <span className="text-[#853491] text-2xl">PIN</span>
       </div>
 
       <div className="flex flex-col items-center justify-center flex-1 px-8">
