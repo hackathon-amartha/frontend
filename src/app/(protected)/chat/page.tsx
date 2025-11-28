@@ -19,6 +19,7 @@ export default function ChatPage() {
     isStreaming,
     error,
     sendMessage,
+    sendAudioMessage,
     loadThread,
     loadThreads,
     newThread,
@@ -119,6 +120,7 @@ export default function ChatPage() {
       {/* Input */}
       <ChatInput
         onSend={sendMessage}
+        onSendAudio={sendAudioMessage}
         disabled={isLoading}
         isStreaming={isStreaming}
       />

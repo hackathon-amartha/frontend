@@ -4,6 +4,7 @@ import { useState, useCallback, useRef } from "react";
 import { flushSync } from "react-dom";
 import type { Thread, Message } from "@/types/chat";
 import * as chatService from "@/services/chat";
+import * as sttService from "@/services/stt";
 
 interface LocalMessage {
   id: string;
@@ -21,6 +22,7 @@ interface UseChatReturn {
   isStreaming: boolean;
   error: string | null;
   sendMessage: (message: string, audio?: Blob) => Promise<void>;
+  sendAudioMessage: (audio: Blob) => Promise<void>;
   loadThread: (threadId: string) => Promise<void>;
   loadThreads: () => Promise<void>;
   newThread: () => void;
@@ -183,6 +185,105 @@ export function useChat(): UseChatReturn {
     [currentThreadId, loadThreads]
   );
 
+  const sendAudioMessage = useCallback(
+    async (audio: Blob) => {
+      if (!audio || audio.size === 0) return;
+
+      setIsLoading(true);
+      setIsStreaming(true);
+      setError(null);
+
+      const userMessageId = `user-${Date.now()}`;
+      const assistantMessageId = `assistant-${Date.now()}`;
+
+      // Add a placeholder user message (will be updated with transcript)
+      setMessages((prev) => [
+        ...prev,
+        { id: userMessageId, role: "user", content: "..." },
+      ]);
+
+      // Add assistant message placeholder
+      setMessages((prev) => [
+        ...prev,
+        { id: assistantMessageId, role: "assistant", content: "", isStreaming: true },
+      ]);
+
+      const contentRef = { current: "" };
+      const controller = new AbortController();
+      abortControllerRef.current = controller;
+
+      try {
+        await sttService.sendAudioStreaming(
+          audio,
+          currentThreadId,
+          {
+            onThreadCreated: (threadId) => {
+              setCurrentThreadId(threadId);
+              loadThreads();
+            },
+            onTranscript: (transcript) => {
+              // Update user message with the actual transcript
+              flushSync(() => {
+                setMessages((prev) =>
+                  prev.map((msg) =>
+                    msg.id === userMessageId
+                      ? { ...msg, content: transcript }
+                      : msg
+                  )
+                );
+              });
+            },
+            onChunk: (chunkContent) => {
+              contentRef.current += chunkContent;
+              flushSync(() => {
+                setMessages((prev) =>
+                  prev.map((msg) =>
+                    msg.id === assistantMessageId
+                      ? { ...msg, content: contentRef.current }
+                      : msg
+                  )
+                );
+              });
+            },
+            onTitleGenerated: (title) => {
+              setCurrentThreadTitle(title);
+              loadThreads();
+            },
+            onDone: (fullContent) => {
+              flushSync(() => {
+                setMessages((prev) =>
+                  prev.map((msg) =>
+                    msg.id === assistantMessageId
+                      ? { ...msg, content: fullContent || contentRef.current, isStreaming: false }
+                      : msg
+                  )
+                );
+              });
+            },
+            onError: (errorMsg) => {
+              setError(errorMsg);
+            },
+          },
+          controller
+        );
+      } catch (err) {
+        if (err instanceof Error && err.name === "AbortError") {
+          return;
+        }
+        setError(err instanceof Error ? err.message : "Failed to process audio");
+        // Remove placeholder messages on error
+        setMessages((prev) =>
+          prev.filter((msg) => msg.id !== userMessageId && msg.id !== assistantMessageId)
+        );
+      } finally {
+        setIsLoading(false);
+        setIsStreaming(false);
+        abortControllerRef.current = null;
+      }
+    },
+    [currentThreadId, loadThreads]
+  );
+
   return {
     messages,
     threads,
@@ -192,6 +293,7 @@ export function useChat(): UseChatReturn {
     isStreaming,
     error,
     sendMessage,
+    sendAudioMessage,
     loadThread,
     loadThreads,
     newThread,

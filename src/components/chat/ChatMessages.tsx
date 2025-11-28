@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import ReactMarkdown from "react-markdown";
 
 interface Message {
   id: string;
@@ -66,12 +67,12 @@ export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
                 : "bg-zinc-100 text-zinc-800 rounded-bl-md"
             }`}
           >
-            <p className="text-sm whitespace-pre-wrap break-words">
-              {message.content}
+            <div className="text-sm break-words prose prose-sm max-w-none prose-p:my-1 prose-headings:my-2 prose-ul:my-1 prose-ol:my-1 prose-li:my-0.5 prose-pre:my-2 prose-code:bg-zinc-200 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-zinc-200 prose-pre:p-2 prose-pre:rounded-lg [&_*]:text-inherit">
+              <ReactMarkdown>{message.content}</ReactMarkdown>
               {message.isStreaming && (
                 <span className="inline-block w-1.5 h-4 ml-1 bg-current animate-pulse" />
               )}
-            </p>
+            </div>
           </div>
         </div>
       ))}
