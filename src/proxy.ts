@@ -1,8 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { updateSession } from "@/lib/supabase/middleware";
 
-export const runtime = "edge";
-
 // Public routes that don't require authentication
 const publicRoutes = ["/", "/login", "/register"];
 
