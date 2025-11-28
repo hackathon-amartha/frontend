@@ -2,7 +2,6 @@ import { createClient } from "@/lib/supabase/client";
 
 const supabase = createClient();
 
-// Set to true to bypass OTP verification (for development)
 const BYPASS_OTP = true;
 
 export interface AuthResponse {
@@ -11,10 +10,9 @@ export interface AuthResponse {
   data?: unknown;
 }
 
-// Store phone number temporarily for registration flow
 let pendingPhoneNumber: string | null = null;
+let pendingFullName: string | null = null;
 
-// Login with phone number and PIN
 export async function loginWithPhoneAndPin(
   phoneNumber: string,
   pin: string
@@ -42,13 +40,14 @@ export async function loginWithPhoneAndPin(
   }
 }
 
-// Step 1: Send OTP to phone number
-export async function sendOTP(phoneNumber: string): Promise<AuthResponse> {
-  // Store phone for later use in bypass mode
+export async function sendOTP(
+  phoneNumber: string,
+  fullName?: string
+): Promise<AuthResponse> {
   pendingPhoneNumber = phoneNumber;
+  pendingFullName = fullName || null;
 
   if (BYPASS_OTP) {
-    // Bypass: Skip actual OTP sending
     return {
       success: true,
       message: "OTP sent successfully (bypass mode)",
@@ -127,14 +126,20 @@ export async function createPin(pin: string): Promise<AuthResponse> {
       const { data, error } = await supabase.auth.signUp({
         phone: pendingPhoneNumber,
         password: pin,
+        options: {
+          data: {
+            full_name: pendingFullName,
+          },
+        },
       });
 
       if (error) {
         return { success: false, message: error.message };
       }
 
-      // Clear pending phone
+      // Clear pending data
       pendingPhoneNumber = null;
+      pendingFullName = null;
 
       // If session exists, user is logged in
       if (data.session) {

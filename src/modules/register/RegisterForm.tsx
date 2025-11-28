@@ -62,6 +62,7 @@ export function RegisterForm({
               type="text"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
+              placeholder="Amartha Assist"
               className="w-full h-[42px] rounded-[20px] bg-[#E5E5EA] px-4 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#853491]"
             />
           </div>

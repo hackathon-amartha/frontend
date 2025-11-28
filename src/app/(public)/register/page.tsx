@@ -63,7 +63,7 @@ export default function RegisterPage() {
 
     setLoading(true);
     const formattedPhone = `+62${phoneNumber}`;
-    const result = await sendOTP(formattedPhone);
+    const result = await sendOTP(formattedPhone, fullName);
 
     if (result.success) {
       setStep("otp");
