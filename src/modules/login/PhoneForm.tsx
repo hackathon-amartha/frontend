@@ -35,7 +35,7 @@ export function PhoneForm({
         className="absolute size-auto top-20 right-0"
       />
       <div className="flex flex-col w-full max-w-sm">
-        <h1 className="text-[#853491] font-bold text-2xl mb-16">
+        <h1 className="text-[#853491] font-bold text-2xl mb-16 z-20">
           Selamat Datang <br /> di AmarthaFin
         </h1>
 

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -15,6 +14,79 @@ interface Question {
   };
 }
 
+// Scoring system for product recommendation
+// Modal: Business capital loans for micro-entrepreneurs
+// Celengan: Savings/investment for those with extra money
+// AmarthaLink: Digital transaction services for agents/retailers
+
+export type ProductType = "Modal" | "Celengan" | "AmarthaLink";
+
+interface ProductScores {
+  Modal: number;
+  Celengan: number;
+  AmarthaLink: number;
+}
+
+// Scoring weights for each answer
+const scoringRules: Record<number, Record<string, Partial<ProductScores>>> = {
+  // Question 1: What do you need now?
+  1: {
+    "Menambah modal usaha": { Modal: 3 },
+    "Mencari penghasilan tambahan": { AmarthaLink: 3 },
+    "Menabung": { Celengan: 3 },
+  },
+  // Question 2: What business do you have?
+  2: {
+    "Warung kelontong atau kios": { Modal: 2, AmarthaLink: 2 },
+    "Bertani atau beternak": { Modal: 2 },
+    "Kuliner (makanan atau minuman)": { Modal: 2, AmarthaLink: 1 },
+    "Jasa atau layanan": { Modal: 1, AmarthaLink: 1 },
+    "Produksi atau kerajinan": { Modal: 2 },
+    "Tidak ada": { Celengan: 2, AmarthaLink: 1 },
+  },
+  // Question 3: Is your shop busy?
+  3: {
+    "Ramai": { Modal: 2, AmarthaLink: 2 },
+    "Sepi": { Modal: 1 },
+    "Tidak menentu": { Modal: 1, AmarthaLink: 1 },
+  },
+  // Question 4: Phone proficiency
+  4: {
+    "Masih sering bingung": { Modal: 1 },
+    "Lumayan bisa": { Modal: 1, AmarthaLink: 1 },
+    "Sudah cukup lancar": { AmarthaLink: 2, Celengan: 1 },
+    "Lancar sekali": { AmarthaLink: 3, Celengan: 2 },
+  },
+  // Question 5: Money situation
+  5: {
+    "Selalu habis": { Modal: 2 },
+    "Ada sisa sedikit": { Modal: 1, AmarthaLink: 1 },
+    "Ada sisa cukup banyak": { Celengan: 3, AmarthaLink: 1 },
+  },
+};
+
+// Calculate recommended product based on answers
+export function calculateRecommendation(answers: Record<number, string>): ProductType {
+  const scores: ProductScores = { Modal: 0, Celengan: 0, AmarthaLink: 0 };
+
+  Object.entries(answers).forEach(([questionId, answer]) => {
+    const questionScores = scoringRules[parseInt(questionId)];
+    if (questionScores && questionScores[answer]) {
+      const answerScores = questionScores[answer];
+      if (answerScores.Modal) scores.Modal += answerScores.Modal;
+      if (answerScores.Celengan) scores.Celengan += answerScores.Celengan;
+      if (answerScores.AmarthaLink) scores.AmarthaLink += answerScores.AmarthaLink;
+    }
+  });
+
+  // Find the product with highest score
+  const maxScore = Math.max(scores.Modal, scores.Celengan, scores.AmarthaLink);
+
+  if (scores.Modal === maxScore) return "Modal";
+  if (scores.Celengan === maxScore) return "Celengan";
+  return "AmarthaLink";
+}
+
 const allQuestions: Question[] = [
   {
     id: 1,
@@ -23,7 +95,6 @@ const allQuestions: Question[] = [
       "Menambah modal usaha",
       "Mencari penghasilan tambahan",
       "Menabung",
-      "Belum tahu",
     ],
   },
   {
@@ -66,10 +137,10 @@ const allQuestions: Question[] = [
 
 interface QuestionFormProps {
   onBack: () => void;
+  onComplete: (answers: Record<number, string>, recommendation: ProductType) => void;
 }
 
-export function QuestionForm({ onBack }: QuestionFormProps) {
-  const router = useRouter();
+export function QuestionForm({ onBack, onComplete }: QuestionFormProps) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [progressStep, setProgressStep] = useState(1);
@@ -111,7 +182,9 @@ export function QuestionForm({ onBack }: QuestionFormProps) {
       // Skip progress step 3 if not warung kelontong
       setProgressStep((prev) => (shouldSkipConditional ? prev + 2 : prev + 1));
     } else {
-      router.push("/dashboard");
+      // Calculate recommendation and call onComplete
+      const recommendation = calculateRecommendation(answers);
+      onComplete(answers, recommendation);
     }
   };
 
@@ -152,7 +225,7 @@ export function QuestionForm({ onBack }: QuestionFormProps) {
               key={index}
               type="button"
               onClick={() => handleSelectOption(option)}
-              className={`w-full h-[42px] rounded-[20px] text-center font-medium transition-all ${
+              className={`w-full h-[42px] rounded-[20px] text-center font-medium transition-all cursor-pointer ${
                 answers[currentQ.id] === option
                   ? "bg-[#E4D7F1] text-[#853491]"
                   : "bg-[#E5E5EA] text-gray-900"
