@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { SuccessRegister, QuestionForm } from "@/modules/onboarding";
 
+export const runtime = "edge";
+
 type Step = "success" | "questions";
 
 export default function OnboardingPage() {

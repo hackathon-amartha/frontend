@@ -1,6 +1,8 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { updateSession } from "@/lib/supabase/middleware";
 
+export const runtime = "edge";
+
 // Public routes that don't require authentication
 const publicRoutes = ["/", "/login", "/register"];
 
@@ -11,7 +13,7 @@ function isPublicRoute(pathname: string): boolean {
   );
 }
 
-export async function proxy(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { user, supabaseResponse } = await updateSession(request);
   const { pathname } = request.nextUrl;
 

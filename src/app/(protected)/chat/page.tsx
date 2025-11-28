@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { useChat } from "@/hooks/useChat";
 import { ChatSidebar, ChatMessages, ChatInput } from "@/components/chat";
 
+export const runtime = "edge";
+
 export default function ChatPage() {
   const router = useRouter();
   const [sidebarOpen, setSidebarOpen] = useState(false);
