@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && npx @cloudflare/next-on-pages",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "deploy:cf": "npx @cloudflare/next-on-pages && wrangler pages deploy .vercel/output/static --project-name=amartha-hackathon-frontend"
+    "pages:build": "npx @cloudflare/next-on-pages",
+    "deploy:cf": "pnpm pages:build && wrangler pages deploy .vercel/output/static --project-name=amartha-hackathon-frontend"
   },
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.3.3",
