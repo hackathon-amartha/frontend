@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/client";
 
-const supabase = createClient();
+const getSupabase = () => createClient();
 
 const BYPASS_OTP = true;
 
@@ -18,7 +18,7 @@ export async function loginWithPhoneAndPin(
   pin: string
 ): Promise<AuthResponse> {
   try {
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await getSupabase().auth.signInWithPassword({
       phone: phoneNumber,
       password: pin,
     });
@@ -56,7 +56,7 @@ export async function sendOTP(
   }
 
   try {
-    const { data, error } = await supabase.auth.signInWithOtp({
+    const { data, error } = await getSupabase().auth.signInWithOtp({
       phone: phoneNumber,
     });
 
@@ -95,7 +95,7 @@ export async function verifyOTP(
   }
 
   try {
-    const { data, error } = await supabase.auth.verifyOtp({
+    const { data, error } = await getSupabase().auth.verifyOtp({
       phone: phoneNumber,
       token: otp,
       type: "sms",
@@ -123,7 +123,7 @@ export async function createPin(pin: string): Promise<AuthResponse> {
   if (BYPASS_OTP && pendingPhoneNumber) {
     // Bypass: Create user directly with phone and PIN
     try {
-      const { data, error } = await supabase.auth.signUp({
+      const { data, error } = await getSupabase().auth.signUp({
         phone: pendingPhoneNumber,
         password: pin,
         options: {
@@ -166,7 +166,7 @@ export async function createPin(pin: string): Promise<AuthResponse> {
 
   // Normal flow: Update existing user's password
   try {
-    const { data, error } = await supabase.auth.updateUser({
+    const { data, error } = await getSupabase().auth.updateUser({
       password: pin,
     });
 
@@ -190,7 +190,7 @@ export async function createPin(pin: string): Promise<AuthResponse> {
 // Logout
 export async function logout(): Promise<AuthResponse> {
   try {
-    const { error } = await supabase.auth.signOut();
+    const { error } = await getSupabase().auth.signOut();
 
     if (error) {
       return { success: false, message: error.message };
@@ -207,7 +207,7 @@ export async function logout(): Promise<AuthResponse> {
 
 // Get current session
 export async function getSession() {
-  const { data, error } = await supabase.auth.getSession();
+  const { data, error } = await getSupabase().auth.getSession();
   if (error) {
     return null;
   }
@@ -216,7 +216,7 @@ export async function getSession() {
 
 // Get current user
 export async function getCurrentUser() {
-  const { data, error } = await supabase.auth.getUser();
+  const { data, error } = await getSupabase().auth.getUser();
   if (error) {
     return null;
   }
