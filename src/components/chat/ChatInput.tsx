@@ -168,7 +168,7 @@ export function ChatInput({ onSend, onSendAudio, disabled, isStreaming }: ChatIn
   };
 
   return (
-    <div className="border-t border-zinc-200 p-4 bg-white">
+    <div className="p-4 bg-white">
       {showPermissionError && (
         <div className="mb-3 p-3 bg-amber-50 border border-amber-200 rounded-lg flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -215,7 +215,7 @@ export function ChatInput({ onSend, onSendAudio, disabled, isStreaming }: ChatIn
         <div className="flex items-center gap-3">
           <button
             onClick={cancelRecording}
-            className="flex-shrink-0 w-11 h-11 flex items-center justify-center bg-zinc-200 text-zinc-600 rounded-full hover:bg-zinc-300 transition-colors"
+            className="flex-shrink-0 w-11 h-11 flex items-center justify-center bg-[#E4D7F1] text-[#7954A3] rounded-full hover:bg-[#d4c3e8] transition-colors cursor-pointer"
             title="Cancel recording"
           >
             <svg
@@ -234,17 +234,22 @@ export function ChatInput({ onSend, onSendAudio, disabled, isStreaming }: ChatIn
             </svg>
           </button>
 
-          <div className="flex-1 flex items-center gap-3 px-4 py-3 bg-red-50 rounded-2xl">
-            <span className="w-3 h-3 bg-red-500 rounded-full animate-pulse" />
-            <span className="text-sm font-medium text-red-600">
-              Recording... {formatDuration(recordingDuration)}
+          <div className="flex-1 flex items-center justify-between px-4 py-3 bg-[#E4D7F1] rounded-2xl">
+            <div className="flex items-center gap-3">
+              <span className="w-3 h-3 bg-[#7954A3] rounded-full animate-pulse" />
+              <span className="text-sm font-medium text-[#7954A3]">
+                Recording...
+              </span>
+            </div>
+            <span className="text-sm font-medium text-[#7954A3]">
+              {formatDuration(recordingDuration)}
             </span>
           </div>
 
           <button
             onClick={handleRecordingToggle}
             disabled={disabled || isStreaming}
-            className="flex-shrink-0 w-11 h-11 flex items-center justify-center bg-red-600 text-white rounded-full hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="flex-shrink-0 w-11 h-11 flex items-center justify-center bg-[#7954A3] text-white rounded-full hover:bg-[#6a4891] disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
             title="Stop and send"
           >
             <svg
@@ -268,7 +273,7 @@ export function ChatInput({ onSend, onSendAudio, disabled, isStreaming }: ChatIn
           <button
             onClick={handleRecordingToggle}
             disabled={disabled || isStreaming}
-            className="flex-shrink-0 w-11 h-11 flex items-center justify-center bg-zinc-100 text-zinc-600 rounded-full hover:bg-zinc-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="flex-shrink-0 w-11 h-11 flex items-center justify-center bg-[#E4D7F1] text-[#7954A3] rounded-full hover:bg-[#d4c3e8] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             title="Record audio"
           >
             <svg
@@ -287,7 +292,7 @@ export function ChatInput({ onSend, onSendAudio, disabled, isStreaming }: ChatIn
             </svg>
           </button>
 
-          <div className="flex-1 relative">
+          <div className="flex-1 relative flex flex-row justify-end">
             <textarea
               ref={textareaRef}
               value={message}
@@ -296,10 +301,10 @@ export function ChatInput({ onSend, onSendAudio, disabled, isStreaming }: ChatIn
                 handleInput();
               }}
               onKeyDown={handleKeyDown}
-              placeholder="Type a message..."
+              placeholder="Ketik di sini..."
               disabled={disabled || isStreaming}
               rows={1}
-              className="w-full px-4 py-3 pr-12 bg-zinc-100 rounded-2xl resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-colors text-sm text-zinc-800 placeholder:text-zinc-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full px-4 py-3 pr-12 bg-[#E4D7F1] rounded-2xl resize-none focus:outline-none focus:ring-2 focus:ring-[#7954A3] focus:bg-white transition-colors text-sm text-zinc-800 placeholder:text-[#7954A3]/60 disabled:opacity-50 disabled:cursor-not-allowed"
               style={{ maxHeight: "120px" }}
             />
           </div>
@@ -307,7 +312,7 @@ export function ChatInput({ onSend, onSendAudio, disabled, isStreaming }: ChatIn
           <button
             onClick={handleSubmit}
             disabled={!message.trim() || disabled || isStreaming}
-            className="flex-shrink-0 w-11 h-11 flex items-center justify-center bg-blue-600 text-white rounded-full hover:bg-blue-700 disabled:bg-zinc-300 disabled:cursor-not-allowed transition-colors"
+            className="flex-shrink-0 w-11 h-11 flex items-center justify-center bg-[#7954A3] text-white rounded-full hover:bg-[#6a4891] disabled:bg-[#E4D7F1] disabled:text-[#7954A3]/50 disabled:cursor-not-allowed transition-colors"
           >
             {isStreaming ? (
               <svg
@@ -349,10 +354,10 @@ export function ChatInput({ onSend, onSendAudio, disabled, isStreaming }: ChatIn
           </button>
         </div>
       )}
-      <p className="text-xs text-zinc-400 mt-2 text-center">
+      <p className="text-xs text-[#7954A3]/60 mt-2 text-center">
         {isRecording
-          ? "Tap send to finish, or X to cancel"
-          : "Press Enter to send, Shift+Enter for new line"}
+          ? "Ketuk kirim untuk selesai, atau X untuk batal"
+          : ""}
       </p>
     </div>
   );

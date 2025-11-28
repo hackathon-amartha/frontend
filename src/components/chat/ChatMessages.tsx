@@ -63,11 +63,15 @@ export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
           <div
             className={`max-w-[85%] px-4 py-3 rounded-2xl ${
               message.role === "user"
-                ? "bg-blue-600 text-white rounded-br-md"
-                : "bg-zinc-100 text-zinc-800 rounded-bl-md"
+                ? "bg-[#7954A3] rounded-br-md"
+                : "bg-[#E4D7F1] rounded-bl-md"
             }`}
           >
-            <div className="text-sm break-words prose prose-sm max-w-none prose-p:my-1 prose-headings:my-2 prose-ul:my-1 prose-ol:my-1 prose-li:my-0.5 prose-pre:my-2 prose-code:bg-zinc-200 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-zinc-200 prose-pre:p-2 prose-pre:rounded-lg [&_*]:text-inherit">
+            <div className={`text-sm break-words prose prose-sm max-w-none prose-p:my-1 prose-headings:my-2 prose-ul:my-1 prose-ol:my-1 prose-li:my-0.5 prose-pre:my-2 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:p-2 prose-pre:rounded-lg ${
+              message.role === "user"
+                ? "text-white prose-p:text-white prose-headings:text-white prose-strong:text-white prose-li:text-white prose-code:text-white prose-code:bg-white/20 prose-pre:bg-white/20"
+                : "text-black prose-p:text-black prose-headings:text-black prose-strong:text-black prose-li:text-black prose-code:text-black prose-code:bg-black/10 prose-pre:bg-black/10"
+            }`}>
               <ReactMarkdown>{message.content}</ReactMarkdown>
               {message.isStreaming && (
                 <span className="inline-block w-1.5 h-4 ml-1 bg-current animate-pulse" />
@@ -79,11 +83,11 @@ export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
 
       {isLoading && messages.length > 0 && !messages[messages.length - 1]?.isStreaming && (
         <div className="flex justify-start">
-          <div className="bg-zinc-100 text-zinc-800 px-4 py-3 rounded-2xl rounded-bl-md">
+          <div className="bg-[#E4D7F1] text-zinc-800 px-4 py-3 rounded-2xl rounded-bl-md">
             <div className="flex gap-1.5">
-              <span className="w-2 h-2 bg-zinc-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-              <span className="w-2 h-2 bg-zinc-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-              <span className="w-2 h-2 bg-zinc-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+              <span className="w-2 h-2 bg-[#7954A3] rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+              <span className="w-2 h-2 bg-[#7954A3] rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+              <span className="w-2 h-2 bg-[#7954A3] rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
             </div>
           </div>
         </div>

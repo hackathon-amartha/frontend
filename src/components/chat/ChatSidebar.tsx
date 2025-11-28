@@ -56,11 +56,14 @@ export function ChatSidebar({
       >
         <div className="flex flex-col h-full">
           {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b border-zinc-200">
-            <h2 className="text-lg font-semibold text-zinc-800">Chat History</h2>
+          <div
+            className="flex items-center justify-between p-4"
+            style={{ background: 'linear-gradient(to right, #D04D86 11%, #853491 61%)' }}
+          >
+            <h2 className="text-lg font-semibold text-white">Chat History</h2>
             <button
               onClick={onClose}
-              className="p-2 text-zinc-500 hover:text-zinc-700 hover:bg-zinc-100 rounded-lg transition-colors"
+              className="p-2 text-white hover:bg-white/10 rounded-lg transition-colors cursor-pointer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +89,7 @@ export function ChatSidebar({
                 onNewThread();
                 onClose();
               }}
-              className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
+              className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#7954A3] text-white rounded-[20px] font-medium hover:bg-[#6a4891] transition-colors cursor-pointer"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -109,7 +112,7 @@ export function ChatSidebar({
           {/* Thread List */}
           <div className="flex-1 overflow-y-auto custom-scrollbar-hidden">
             {threads.length === 0 ? (
-              <div className="p-4 text-center text-zinc-500 text-sm">
+              <div className="p-4 text-center text-[#7954A3]/60 text-sm">
                 No chat history yet
               </div>
             ) : (
@@ -119,8 +122,8 @@ export function ChatSidebar({
                     key={thread.id}
                     className={`group flex items-center gap-2 p-3 rounded-lg cursor-pointer transition-colors ${
                       currentThreadId === thread.id
-                        ? "bg-blue-50 text-blue-700"
-                        : "hover:bg-zinc-100 text-zinc-700"
+                        ? "bg-[#E4D7F1] text-[#7954A3]"
+                        : "hover:bg-[#E4D7F1]/50 text-[#7954A3]"
                     }`}
                     onClick={() => {
                       onSelectThread(thread.id);
@@ -131,7 +134,7 @@ export function ChatSidebar({
                       <p className="text-sm font-medium truncate">
                         {thread.title || "New Conversation"}
                       </p>
-                      <p className="text-xs text-zinc-500 mt-0.5">
+                      <p className="text-xs text-[#7954A3]/60 mt-0.5">
                         {formatDate(thread.updated_at)}
                       </p>
                     </div>
@@ -140,7 +143,7 @@ export function ChatSidebar({
                         e.stopPropagation();
                         onDeleteThread(thread.id);
                       }}
-                      className="p-1.5 text-zinc-400 hover:text-red-500 hover:bg-red-50 rounded opacity-0 group-hover:opacity-100 transition-all"
+                      className="p-1.5 text-[#7954A3]/40 hover:text-red-500 hover:bg-red-50 rounded opacity-0 group-hover:opacity-100 transition-all cursor-pointer"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
