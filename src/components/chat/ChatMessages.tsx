@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface Message {
   id: string;
@@ -22,13 +23,56 @@ export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  if (messages.length === 0 && !isLoading) {
+  // Loading skeleton when opening a thread
+  if (messages.length === 0 && isLoading) {
+    return (
+      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        {/* User message skeleton */}
+        <div className="flex justify-end">
+          <div className="max-w-[85%] px-4 py-3 rounded-2xl rounded-br-md bg-[#7954A3]/30">
+            <Skeleton className="h-4 w-32 bg-white/40" />
+          </div>
+        </div>
+
+        {/* Assistant message skeleton */}
+        <div className="flex justify-start">
+          <div className="max-w-[85%] px-4 py-3 rounded-2xl rounded-bl-md bg-[#E4D7F1]">
+            <div className="space-y-2">
+              <Skeleton className="h-4 w-48 bg-[#7954A3]/20" />
+              <Skeleton className="h-4 w-40 bg-[#7954A3]/20" />
+            </div>
+          </div>
+        </div>
+
+        {/* User message skeleton */}
+        <div className="flex justify-end">
+          <div className="max-w-[85%] px-4 py-3 rounded-2xl rounded-br-md bg-[#7954A3]/30">
+            <Skeleton className="h-4 w-24 bg-white/40" />
+          </div>
+        </div>
+
+        {/* Assistant message skeleton */}
+        <div className="flex justify-start">
+          <div className="max-w-[85%] px-4 py-3 rounded-2xl rounded-bl-md bg-[#E4D7F1]">
+            <div className="space-y-2">
+              <Skeleton className="h-4 w-56 bg-[#7954A3]/20" />
+              <Skeleton className="h-4 w-44 bg-[#7954A3]/20" />
+              <Skeleton className="h-4 w-36 bg-[#7954A3]/20" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Empty state when no messages
+  if (messages.length === 0) {
     return (
       <div className="flex-1 flex flex-col items-center justify-center p-6 text-center">
-        <div className="w-16 h-16 mb-4 bg-blue-100 rounded-full flex items-center justify-center">
+        <div className="w-16 h-16 mb-4 bg-[#E4D7F1] rounded-full flex items-center justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-8 w-8 text-blue-600"
+            className="h-8 w-8 text-[#7954A3]"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -42,10 +86,10 @@ export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
           </svg>
         </div>
         <h3 className="text-lg font-semibold text-zinc-800 mb-2">
-          Start a Conversation
+          Mulai Percakapan
         </h3>
         <p className="text-sm text-zinc-500 max-w-[250px]">
-          Ask me anything about loans, applications, or any questions you have.
+          Tanyakan apa saja tentang pinjaman, aplikasi, atau pertanyaan lainnya.
         </p>
       </div>
     );
