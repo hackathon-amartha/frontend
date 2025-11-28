@@ -16,7 +16,7 @@ interface OtpFormProps {
 
 export function OtpForm({
   otp,
-  phoneNumber,
+  phoneNumber: _phoneNumber,
   error,
   loading,
   onBack,
@@ -24,6 +24,7 @@ export function OtpForm({
   onOtpKeyDown,
   onResendOtp,
 }: OtpFormProps) {
+  void _phoneNumber; // Reserved for future use
   const [timer, setTimer] = useState(30);
 
   useEffect(() => {

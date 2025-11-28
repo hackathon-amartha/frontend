@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Work_Sans } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/navbar";
 
 const workSans = Work_Sans({
   variable: "--font-work-sans",
