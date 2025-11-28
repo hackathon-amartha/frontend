@@ -10,8 +10,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Amartha",
-  description: "Amartha Hackathon",
+  title: "Amartha Assist",
+  description: "Amartha Assist",
 };
 
 export default function RootLayout({
@@ -23,7 +23,6 @@ export default function RootLayout({
     <html lang="en" className={`scroll-smooth scroll-pt-[100px] ${poppins.variable}`}>
       <body className="min-h-screen overflow-x-hidden custom-scrollbar-hidden antialiased flex justify-center">
         <div className="w-full max-w-[402px] min-h-screen shadow-custom">
-          <Navbar />
           {children}
         </div>
       </body>

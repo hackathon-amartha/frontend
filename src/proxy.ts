@@ -17,7 +17,7 @@ export async function proxy(request: NextRequest) {
 
   // If user is not authenticated and trying to access protected route
   if (!user && !isPublicRoute(pathname)) {
-    const loginUrl = new URL("/login", request.url);
+    const loginUrl = new URL("/", request.url);
     loginUrl.searchParams.set("redirect", pathname);
     return NextResponse.redirect(loginUrl);
   }

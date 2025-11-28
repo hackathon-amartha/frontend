@@ -7,7 +7,7 @@ export function Navbar() {
   const pathname = usePathname();
 
   // Hide navbar on login/register pages
-  if (pathname === "/login" || pathname === "/register") {
+  if (pathname === "/" || pathname === "/register") {
     return null;
   }
 

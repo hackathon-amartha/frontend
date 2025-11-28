@@ -1,28 +1,215 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { loginWithPhoneAndPin } from "@/services/auth";
+import { ArrowLeft } from "lucide-react";
+
+type Step = "phone" | "pin";
 
 export default function Home() {
+  const router = useRouter();
+  const [step, setStep] = useState<Step>("phone");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [pin, setPin] = useState(["", "", "", "", "", ""]);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (value === "" || /^\+?\d*$/.test(value)) {
+      setPhoneNumber(value);
+    }
+  };
+
+  const validatePhoneNumber = (phone: string): boolean => {
+    const digits = phone.replace(/\+/g, "");
+    return digits.length >= 10 && digits.length <= 15;
+  };
+
+  const handleBack = () => {
+    setError("");
+    setStep("phone");
+    setPin(["", "", "", "", "", ""]);
+  };
+
+  const handlePhoneSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+
+    if (!validatePhoneNumber(phoneNumber)) {
+      setError("Masukkan nomor telepon yang valid");
+      return;
+    }
+
+    setStep("pin");
+  };
+
+  const handlePinChange = (index: number, value: string) => {
+    if (value.length > 1) return;
+    if (value !== "" && !/^\d$/.test(value)) return;
+
+    const newPin = [...pin];
+    newPin[index] = value;
+    setPin(newPin);
+
+    if (value !== "" && index < 5) {
+      const nextInput = document.getElementById(`pin-${index + 1}`);
+      nextInput?.focus();
+    }
+  };
+
+  const handlePinKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Backspace" && pin[index] === "" && index > 0) {
+      const prevInput = document.getElementById(`pin-${index - 1}`);
+      prevInput?.focus();
+    }
+  };
+
+  const handlePinSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+
+    const pinValue = pin.join("");
+    if (pinValue.length !== 6) {
+      setError("Masukkan PIN 6 digit");
+      return;
+    }
+
+    setLoading(true);
+
+    let formattedPhone = phoneNumber;
+    if (phoneNumber.startsWith("+")) {
+      formattedPhone = phoneNumber;
+    } else if (phoneNumber.startsWith("0")) {
+      formattedPhone = `+62${phoneNumber.slice(1)}`;
+    } else {
+      formattedPhone = `+62${phoneNumber}`;
+    }
+
+    const result = await loginWithPhoneAndPin(formattedPhone, pinValue);
+
+    if (result.success) {
+      router.push("/dashboard");
+      router.refresh();
+    } else {
+      setError(result.message);
+    }
+
+    setLoading(false);
+  };
+
+  if (step === "phone") {
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-center bg-white px-8 py-8 relative">
+        <Image
+          src="/auth/top-circle.svg"
+          alt="Top Circle Svg"
+          width={0}
+          height={0}
+          className="absolute size-auto top-0 right-0"
+        />
+        <Image
+          src="/amartha-logo.svg"
+          alt="Amartha Logo"
+          width={0}
+          height={0}
+          className="absolute size-auto top-20 right-0"
+        />
+        <div className="flex flex-col w-full max-w-sm">
+          <h1 className="text-[#853491] font-bold text-2xl mb-16">
+            Selamat Datang <br /> di AmarthaFin
+          </h1>
+
+          <form onSubmit={handlePhoneSubmit} className="flex flex-col gap-5">
+            {error && (
+              <div className="rounded-[20px] bg-red-50 p-3 text-sm text-red-600">
+                {error}
+              </div>
+            )}
+
+            <div className="flex flex-col gap-2">
+              <label className="text-[#853491] text-lg">
+                Nomor Telepon
+              </label>
+              <Input
+                type="tel"
+                value={phoneNumber}
+                onChange={handlePhoneChange}
+                placeholder="+6281234654851"
+                className="rounded-[20px] bg-[#E5E5EA] border-none h-[42px]"
+              />
+            </div>
+
+            <Button
+              type="submit"
+              className="rounded-[20px] bg-[#853491] hover:bg-[#853491]/90 h-[42px] text-white font-medium"
+            >
+              Masuk
+            </Button>
+
+            <Link href="/register" className="text-center text-[#853491] font-medium">
+              Belum punya akun?
+            </Link>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
+  // PIN Step
   return (
-    <div className="flex min-h-screen flex-col bg-white px-6 py-8">
-      <div className="flex flex-1 flex-col items-center justify-center text-center">
-        <h1 className="text-3xl font-bold text-zinc-900">Welcome</h1>
-        <p className="mt-3 text-zinc-500">
-          Secure authentication with phone number and PIN
-        </p>
+    <div className="flex min-h-screen flex-col bg-white py-8 relative">
+      {/* Header */}
+      <div className="flex items-center gap-4 mb-8 border-b border-[#BDB7C3] pt-2 pb-6 px-8">
+        <button
+          type="button"
+          onClick={handleBack}
+          className="text-[#853491] cursor-pointer"
+        >
+          <ArrowLeft className="size-6"/>
+        </button>
+        <span className="text-[#853491] font-medium text-lg">PIN</span>
       </div>
 
-      <div className="space-y-3 pb-8">
-        <Link
-          href="/login"
-          className="flex w-full items-center justify-center rounded-xl bg-blue-600 py-3.5 font-medium text-white transition-colors hover:bg-blue-700"
-        >
-          Login
-        </Link>
-        <Link
-          href="/register"
-          className="flex w-full items-center justify-center rounded-xl border border-zinc-200 py-3.5 font-medium text-zinc-700 transition-colors hover:bg-zinc-50"
-        >
-          Register
-        </Link>
+      <div className="flex flex-col items-center justify-center flex-1 px-8">
+        <form onSubmit={handlePinSubmit} className="flex flex-col items-center w-full max-w-sm gap-12">
+          {error && (
+            <div className="rounded-[20px] bg-red-50 p-3 text-sm text-red-600 mb-4 w-full text-center">
+              {error}
+            </div>
+          )}
+
+          <p className="text-[#853491] font-medium">Masukan PIN</p>
+
+          <div className="flex gap-3.5">
+            {pin.map((digit, index) => (
+              <input
+                key={index}
+                id={`pin-${index}`}
+                type="password"
+                inputMode="numeric"
+                maxLength={1}
+                value={digit}
+                onChange={(e) => handlePinChange(index, e.target.value)}
+                onKeyDown={(e) => handlePinKeyDown(index, e)}
+                className="w-10 h-10 rounded-full bg-[#E5E5EA] text-center text-xl focus:outline-none focus:ring-2 focus:ring-[#853491]"
+              />
+            ))}
+          </div>
+
+          <Button
+            type="submit"
+            disabled={loading}
+            className="rounded-[20px] bg-[#853491] hover:bg-[#853491]/90 h-[42px] text-white font-medium w-full max-w-xs"
+          >
+            {loading ? "Loading..." : "Masuk"}
+          </Button>
+        </form>
       </div>
     </div>
   );
