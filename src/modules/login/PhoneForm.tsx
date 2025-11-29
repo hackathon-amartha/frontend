@@ -21,21 +21,21 @@ export function PhoneForm({
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-white px-8 py-8 relative">
       <Image
-        src="/auth/top-circle.svg"
+        src="/onboarding/ellipse.svg"
         alt="Top Circle Svg"
         width={0}
         height={0}
-        className="absolute size-auto top-0 right-0"
+        className="absolute size-auto -top-32 right-0"
       />
       <Image
         src="/amartha-logo.svg"
         alt="Amartha Logo"
         width={0}
         height={0}
-        className="absolute size-auto top-20 right-0"
+        className="absolute size-auto top-0 left-0"
       />
-      <div className="flex flex-col w-full max-w-sm">
-        <h1 className="text-[#853491] font-bold text-2xl mb-16 z-20">
+      <div className="flex flex-col w-full max-w-sm z-20">
+        <h1 className="text-[#853491] font-bold text-2xl mb-16">
           Selamat Datang <br /> di AmarthaFin
         </h1>
 

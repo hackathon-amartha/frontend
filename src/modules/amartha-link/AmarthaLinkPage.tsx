@@ -126,20 +126,12 @@ export function AmarthaLinkPage() {
           </div>
         </div>
 
-        <div className='bg-white p-3 flex flex-col gap-4 rounded-[20px] drop-shadow-xl mt-4'>
+        <div className='bg-white p-3 flex flex-col gap-4 rounded-[20px] drop-shadow-xl mt-4 mb-6'>
           <p className='text-sm text-[#853491] font-bold tracking-[.2px]'>
             Sering ditanyakan
           </p>
 
           <FAQ type="amarthalink" />
-        </div>
-
-        <div className="mt-6 mb-8">
-          <Button
-            className="rounded-[20px] bg-[#853491] hover:bg-[#853491]/90 h-[42px] text-white font-medium w-full"
-          >
-            Lanjut Investasi di Celengan
-          </Button>
         </div>
       </div>
     </div>
