@@ -158,7 +158,7 @@ export default async function DashboardPage() {
                   className="size-5"
                 />
                 <span className="text-[#853491] font-bold">
-                  amartha <span className="text-[#FF921F]">Link</span>
+                  amartha<span className="text-[#FF921F]">Link</span>
                 </span>
               </div>
 
@@ -170,7 +170,7 @@ export default async function DashboardPage() {
             </p>
 
             <p className="text-[#853491] text-xs">
-              Mulai dari Rp10.000, siapkan masa depan keluarga dengan investasi aman
+              Jadi agen sekarang dan dapatkan komisi hingga jutaan per bulan.
             </p>
           </Link>
         </div>
