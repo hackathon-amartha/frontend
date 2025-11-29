@@ -56,6 +56,7 @@ export function useChat(): UseChatReturn {
   const loadThread = useCallback(async (threadId: string) => {
     setIsLoading(true);
     setError(null);
+    setMessages([]);
 
     try {
       const data = await chatService.getThread(threadId);
