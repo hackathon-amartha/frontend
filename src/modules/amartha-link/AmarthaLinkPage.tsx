@@ -2,7 +2,6 @@ import Image from 'next/image';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { FAQ } from '@/components/FAQ';
-import { Button } from '@/components/ui/button';
 
 export function AmarthaLinkPage() {
   return (

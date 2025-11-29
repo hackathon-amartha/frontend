@@ -1,7 +1,8 @@
 import { redirect } from "next/navigation";
-import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import LogoutButton from "./logout-button";
+import Image from "next/image";
+import Link from "next/link";
+import { ChevronRight, MessageCircle } from "lucide-react";
 
 export const runtime = "edge";
 
@@ -16,18 +17,32 @@ export default async function DashboardPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-zinc-50">
-      <div className="flex-1 px-4 py-6">
-        {/* Chat CTA */}
-        <Link
-          href="/chat"
-          className="block mb-4 rounded-2xl bg-blue-600 p-5 shadow-sm hover:bg-blue-700 transition-colors"
-        >
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+    <div className="flex min-h-screen flex-col bg-white relative">
+      {/* Purple gradient header */}
+      <Image 
+        src="/ellipse-dashboard.svg"
+        alt="Background Ellipse"
+        width={0}
+        height={0}
+        className="size-auto absolute top-0 w-full"
+
+      />
+      {/* Content area */}
+      <div className="space-y-4 z-10 items-center mt-12 flex flex-col w-full px-4">
+        <Image
+          src="/amartha-logo-dashboard.svg"
+          alt="Amartha Logo"
+          width={0}
+          height={0}
+          className="h-20 w-auto z-10"
+        />
+        {/* Poket Card */}
+        <div className="bg-white border border-[#BDB7C3] rounded-[20px] shadow-lg overflow-hidden w-full mt-12">
+          <div className="p-4">
+            <div className="flex items-center gap-2 mb-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 text-white"
+                className="h-5 w-5 text-[#853491]"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -36,52 +51,126 @@ export default async function DashboardPage() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                  d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
                 />
               </svg>
+              <span className="text-sm font-medium text-[#853491]">Poket</span>
             </div>
-            <div className="flex-1">
-              <h3 className="text-white font-semibold">Start Chat</h3>
-              <p className="text-white/80 text-sm">
-                Ask questions about loans and more
-              </p>
-            </div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-white/80"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
+            <p className="text-sm font-medium text-[#853491]">Rp *******</p>
           </div>
-        </Link>
-
-        <div className="rounded-2xl bg-white p-5 shadow-sm">
-          <h2 className="text-lg font-semibold text-zinc-900">Welcome!</h2>
-          <p className="mt-2 text-sm text-zinc-500">
-            You are logged in as: {user.phone}
-          </p>
-          <div className="mt-4 rounded-xl bg-zinc-50 p-4">
-            <p className="text-xs text-zinc-400">User ID</p>
-            <p className="mt-1 text-sm font-medium text-zinc-700 break-all">
-              {user.id}
-            </p>
-            <p className="mt-3 text-xs text-zinc-400">Created</p>
-            <p className="mt-1 text-sm font-medium text-zinc-700">
-              {new Date(user.created_at).toLocaleString()}
-            </p>
+          <div className="border-t border-gray-100 px-4 py-1 flex items-center justify-between">
+            <span className="text-xs font-medium text-[#853491]">Upgrade ke premium</span>
+            <ChevronRight className="size-6 text-[#853491]" />
           </div>
         </div>
 
-        <div className="mt-4">
-          <LogoutButton />
+        {/* AmarthaAssist Card */}
+        <Link href="/chat" className="w-full px-5 py-2.5 bg-white border border-[#BDB7C3] rounded-[20px]" style={{ boxShadow: '0px 4px 5px 0px rgba(133, 52, 145, 0.5)' }}>
+          <div className="flex flex-row justify-between items-center">
+            <div className="flex flex-col gap-1">
+              <div className="flex flex-row">
+                <MessageCircle className="fill-[#853491] size-6 text-[#853491]" />
+                <Image 
+                  src="/amartha-assist.svg"
+                  alt="Amartha Assist"
+                  width={0}
+                  height={0}
+                  className="size-auto ml-2"
+                />
+              </div>
+              <p className="text-xs text-[#853491]">
+                Bingung? Sini, chat AI kita dulu!
+              </p>
+            </div>
+            <ChevronRight className="size-6 text-[#853491]" />
+          </div>
+        </Link>
+
+        <div className="flex flex-col gap-2 w-full justify-start pb-10">
+          <p className="font-bold text-left text-[#853491]">
+            Produk yang Tersedia
+          </p>
+
+          <Link href="/dashboard/celengan" className="block border border-[#BDB7C3] rounded-[20px] w-full px-3 py-2">
+            <div className="flex flex-row justify-between items-center">
+              <div className="flex flex-row gap-2 items-center mb-1">
+                <Image
+                  src="/celengan/celengan-ijo.svg"
+                  alt="Celengan Icon"
+                  width={0}
+                  height={0}
+                  className="size-5"
+                />
+                <p className="text-[#58A969] font-bold">
+                  Celengan
+                </p>
+              </div>
+
+              <ChevronRight className="size-6 text-[#853491]"/>
+            </div>
+
+            <p className="text-sm font-bold text-[#58A969]">
+              Investasi ringan untuk tujuan jangka panjang
+            </p>
+
+            <p className="text-[#853491] text-xs">
+              Mulai dari Rp10.000, siapkan masa depan keluarga dengan investasi aman
+            </p>
+          </Link>
+
+          <Link href="/dashboard/modal" className="block border border-[#BDB7C3] rounded-[20px] w-full px-3 py-2">
+            <div className="flex flex-row justify-between items-center">
+              <div className="flex flex-row gap-2 items-center mb-1">
+                <Image
+                  src="/modal/money-bag-icon.svg"
+                  alt="Modal Icon"
+                  width={0}
+                  height={0}
+                  className="size-5"
+                />
+                <p className="text-[#126295] font-bold">
+                  Modal
+                </p>
+              </div>
+
+              <ChevronRight className="size-6 text-[#853491]"/>
+            </div>
+
+            <p className="text-sm font-bold text-[#126295]">
+              Pinjaman cepat untuk kebutuhan usaha
+            </p>
+
+            <p className="text-[#853491] text-xs">
+              Ajukan sekarang, cair dalam 1 hari kerja setelah disetujui.
+            </p>
+          </Link>
+
+          <Link href="/dashboard/amartha-link" className="block border border-[#BDB7C3] rounded-[20px] w-full px-3 py-2">
+            <div className="flex flex-row justify-between items-center">
+              <div className="flex flex-row gap-2 items-center mb-1">
+                <Image
+                  src="/amartha-link/user-home.svg"
+                  alt="Amartha Link Icon"
+                  width={0}
+                  height={0}
+                  className="size-5"
+                />
+                <span className="text-[#853491] font-bold">
+                  amartha <span className="text-[#FF921F]">Link</span>
+                </span>
+              </div>
+
+              <ChevronRight className="size-6 text-[#853491]"/>
+            </div>
+
+            <p className="text-sm font-bold text-[#FF921F]">
+              Agen instan, komisi besar
+            </p>
+
+            <p className="text-[#853491] text-xs">
+              Mulai dari Rp10.000, siapkan masa depan keluarga dengan investasi aman
+            </p>
+          </Link>
         </div>
       </div>
     </div>
