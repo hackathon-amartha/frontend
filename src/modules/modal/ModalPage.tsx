@@ -44,12 +44,12 @@ export function ModalPage() {
           alt="Money Icon"
           width={0}
           height={0}
-          className="size-auto mx-auto my-2"
+          className="size-auto mx-auto my-5"
         />
 
         <div className='bg-white p-3 flex flex-col gap-4 rounded-[20px] drop-shadow-xl mt-16'>
           <p className='text-sm text-[#853491] font-bold tracking-[.2px]'>
-            Keuntungan mengajukan Modal
+            Keuntungan mengajukan Modal:
           </p>
 
           <div className="flex flex-col gap-5">

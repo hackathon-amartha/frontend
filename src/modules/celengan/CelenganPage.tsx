@@ -46,7 +46,7 @@ export function CelenganPage() {
           alt="Celengan Icon"
           width={0}
           height={0}
-          className="size-auto mx-auto my-2"
+          className="size-auto mx-auto my-5"
         />
 
         <div className='bg-white p-3 flex flex-col gap-4 rounded-[20px] drop-shadow-xl mt-16'>

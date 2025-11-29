@@ -42,32 +42,32 @@ export function AmarthaLinkPage() {
         </p>
 
         <Image
-          src="/celengan/celengan.svg"
-          alt="Celengan Icon"
+          src="/amartha-link/user-home.svg"
+          alt="Money Icon"
           width={0}
           height={0}
-          className="size-auto mx-auto my-2"
+          className="size-auto mx-auto my-5"
         />
 
         <div className='bg-white p-3 flex flex-col gap-4 rounded-[20px] drop-shadow-xl mt-16'>
           <p className='text-sm text-[#853491] font-bold tracking-[.2px]'>
-            Keuntungan Investasi di Celengan:
+            Keuntungan menjadi AmarthaLink:
           </p>
 
           <div className="flex flex-col gap-5">
             <div className='flex flex-row gap-4 items-center'>
               <Image
-                src="/celengan/hands-icon.svg"
+                src="/amartha-link/money-icon.svg"
                 alt="Hands Icon"
                 width={45}
                 height={45}
               />
               <div className='flex flex-col text-[#853491]'>
                 <p className='text-sm font-bold tracking-[.2px]'>
-                  Dana berkembang setiap periode
+                  Kesempatan untung jutaan
                 </p>
                 <p className='text-xs tracking-[.2px]'>
-                  Dana akan dikirim dalam 1 hari kerja sejak pengajuan disetujui.
+                  Dapatkan komisi hingga jutaan per bulan dengan berjualan produk digital.
                 </p>
               </div>
             </div>
@@ -76,17 +76,17 @@ export function AmarthaLinkPage() {
           <div className="flex flex-col gap-5">
             <div className='flex flex-row gap-4 items-center'>
               <Image
-                src="/celengan/calendar-icon.svg"
-                alt="Calendar Icon"
+                src="/amartha-link/money-bulb-icon.svg"
+                alt="Money Bulb Icon"
                 width={45}
                 height={45}
               />
               <div className='flex flex-col text-[#853491]'>
                 <p className='text-sm font-bold tracking-[.2px]'>
-                  Rencana jangka panjang
+                  Harga produk digital murah
                 </p>
                 <p className='text-xs tracking-[.2px]'>
-                  Persiapan dana keperluan rumah tangga atau tabungan masa depan keluarga.
+                  Semua produk tersedia dengan harga murah, sehingga menarik banyak pembeli.
                 </p>
               </div>
             </div>
