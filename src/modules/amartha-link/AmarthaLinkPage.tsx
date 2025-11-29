@@ -132,6 +132,10 @@ export function AmarthaLinkPage() {
 
           <FAQ type="amarthalink" />
         </div>
+
+        <button className='w-full rounded-[20px] bg-[#853491] hover:bg-[#853491]/90 h-[42px] text-white font-medium mb-8'>
+          Lanjut Jadi Agent
+        </button>
       </div>
     </div>
   );

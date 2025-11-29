@@ -26,6 +26,7 @@ export function PhoneForm({
         width={0}
         height={0}
         className="absolute size-auto -top-32 right-0 w-full"
+        priority
       />
       <Image
         src="/amartha-logo.svg"
@@ -33,6 +34,7 @@ export function PhoneForm({
         width={0}
         height={0}
         className="absolute size-auto top-0 left-0"
+        priority
       />
       <div className="flex flex-col w-full max-w-sm z-20">
         <h1 className="text-[#853491] font-bold text-2xl mb-16">

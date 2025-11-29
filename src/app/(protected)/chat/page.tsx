@@ -69,6 +69,7 @@ export default function ChatPage() {
             alt="amarthaAssist"
             width={140}
             height={20}
+            priority
           />
         </div>
 

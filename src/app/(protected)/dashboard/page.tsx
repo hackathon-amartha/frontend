@@ -20,13 +20,13 @@ export default async function DashboardPage() {
   return (
     <div className="flex min-h-screen flex-col bg-white relative">
       {/* Purple gradient header */}
-      <Image 
+      <Image
         src="/ellipse-dashboard.svg"
         alt="Background Ellipse"
         width={0}
         height={0}
         className="size-auto absolute top-0 w-full"
-
+        priority
       />
       {/* Content area */}
       <div className="space-y-4 z-10 items-center mt-12 flex flex-col w-full px-4 pb-12">
@@ -36,6 +36,7 @@ export default async function DashboardPage() {
           width={0}
           height={0}
           className="h-20 w-auto z-10"
+          priority
         />
         {/* Poket Card */}
         <div className="bg-white border border-[#BDB7C3] rounded-[20px] shadow-lg overflow-hidden w-full mt-12">
