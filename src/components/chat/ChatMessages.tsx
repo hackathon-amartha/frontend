@@ -131,7 +131,7 @@ export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
             <div className={`text-sm break-words prose prose-sm max-w-none prose-p:my-1 prose-headings:my-2 prose-ul:my-1 prose-ol:my-1 prose-li:my-0.5 prose-pre:my-2 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:p-2 prose-pre:rounded-lg ${
               message.role === "user"
                 ? "text-white prose-p:text-white prose-headings:text-white prose-strong:text-white prose-li:text-white prose-code:text-white prose-code:bg-white/20 prose-pre:bg-white/20"
-                : "text-black prose-p:text-black prose-headings:text-black prose-strong:text-black prose-li:text-black prose-code:text-black prose-code:bg-black/10 prose-pre:bg-black/10"
+                : "text-black [&_*]:text-black [&_li]:marker:text-black prose-code:bg-black/10 prose-pre:bg-black/10"
             }`}>
               <ReactMarkdown
                 components={{
