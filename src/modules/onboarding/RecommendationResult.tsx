@@ -20,9 +20,9 @@ const productInfo: Record<ProductType, ProductInfo> = {
     icon: "/onboarding/modal-icon.svg",
     color: "#853491",
     benefits: [
-      "Pinjaman kelompok 15-20 orang",
-      "Proses mudah dan cepat",
-      "Bunga kompetitif",
+      "Pencairan dalam 1 hari",
+      "Pembayaran aman sesuai kemampuan",
+      "Pembayaran otomatis lewat poket",
       "Pendampingan usaha",
     ],
   },

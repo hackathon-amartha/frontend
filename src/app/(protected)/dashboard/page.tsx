@@ -29,7 +29,7 @@ export default async function DashboardPage() {
 
       />
       {/* Content area */}
-      <div className="space-y-4 z-10 items-center mt-12 flex flex-col w-full px-4">
+      <div className="space-y-4 z-10 items-center mt-12 flex flex-col w-full px-4 pb-12">
         <Image
           src="/amartha-logo-dashboard.svg"
           alt="Amartha Logo"
