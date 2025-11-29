@@ -140,7 +140,7 @@ export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
                       href={href || "#"}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-600 underline font-medium hover:opacity-80"
+                      className="!text-blue-600 underline font-medium hover:opacity-80"
                     >
                       {children}
                     </Link>
