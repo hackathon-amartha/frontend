@@ -1,8 +1,15 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export function FloatingChatButton() {
+  const pathname = usePathname();
+
+  if (pathname === "/dashboard") {
+    return null;
+  }
+
   return (
     <Link
       href="/chat"

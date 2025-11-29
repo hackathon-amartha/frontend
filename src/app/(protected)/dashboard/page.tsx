@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight, MessageCircle } from "lucide-react";
+import LogoutButton from "./logout-button";
 
 export const runtime = "edge";
 
@@ -172,6 +173,8 @@ export default async function DashboardPage() {
             </p>
           </Link>
         </div>
+
+        <LogoutButton />
       </div>
     </div>
   );

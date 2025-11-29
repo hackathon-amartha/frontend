@@ -77,7 +77,6 @@ export default function Home() {
           } else {
             router.push("/onboarding");
           }
-          router.refresh();
         } else {
           setError(result.message);
         }

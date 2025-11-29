@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { logout } from "@/services/auth";
+import { Button } from "@/components/ui/button";
 
 export default function LogoutButton() {
   const router = useRouter();
@@ -9,15 +10,14 @@ export default function LogoutButton() {
   const handleLogout = async () => {
     await logout();
     router.push("/");
-    router.refresh();
   };
 
   return (
-    <button
+    <Button
       onClick={handleLogout}
-      className="w-full rounded-xl border border-zinc-200 bg-white py-3.5 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-50"
+      className="w-full rounded-[20px] bg-[#853491] hover:bg-[#853491]/90 h-[42px] text-white font-medium"
     >
       Logout
-    </button>
+    </Button>
   );
 }

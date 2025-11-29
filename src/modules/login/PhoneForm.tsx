@@ -25,7 +25,7 @@ export function PhoneForm({
         alt="Top Circle Svg"
         width={0}
         height={0}
-        className="absolute size-auto -top-32 right-0"
+        className="absolute size-auto -top-32 right-0 w-full"
       />
       <Image
         src="/amartha-logo.svg"
