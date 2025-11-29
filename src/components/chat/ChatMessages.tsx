@@ -147,7 +147,7 @@ export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
                   ),
                 }}
               >
-                {transformProductLinks(message.content)}
+                {message.role === "assistant" ? transformProductLinks(message.content) : message.content}
               </ReactMarkdown>
               {message.isStreaming && (
                 <span className="inline-block w-1.5 h-4 ml-1 bg-current animate-pulse" />
