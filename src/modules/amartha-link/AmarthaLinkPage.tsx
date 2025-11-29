@@ -94,12 +94,44 @@ export function AmarthaLinkPage() {
 
         </div>
 
+        <div className='flex flex-col gap-4 items-center my-4'> 
+          <p className='text-sm text-[#853491] font-bold tracking-[.2px]'>
+            Produk Yang Tersedia
+          </p>
+
+          <div className='border border-[#853491] rounded-[20px] text-center flex items-center justify-center py-1 w-56' style={{ boxShadow: '0px 0px 10px 0.5px #853491' }}>
+            <p className='text-xs text-[#853491]'>
+              Pulsa & Paket Data
+            </p>
+          </div>
+          <div className='border border-[#853491] rounded-[20px] text-center flex items-center justify-center py-1 w-56' style={{ boxShadow: '0px 0px 10px 0.5px #853491' }}>
+            <p className='text-xs text-[#853491]'>
+              Bayar Tagihan dan Pascabayar
+            </p>
+          </div>
+          <div className='border border-[#853491] rounded-[20px] text-center flex items-center justify-center py-1 w-56' style={{ boxShadow: '0px 0px 10px 0.5px #853491' }}>
+            <p className='text-xs text-[#853491]'>
+              Token Listrik
+            </p>
+          </div>
+          <div className='border border-[#853491] rounded-[20px] text-center flex items-center justify-center py-1 w-56' style={{ boxShadow: '0px 0px 10px 0.5px #853491' }}>
+            <p className='text-xs text-[#853491]'>
+              Token Listrik
+            </p>
+          </div>
+          <div className='border border-[#853491] rounded-[20px] text-center flex items-center justify-center py-1 w-56' style={{ boxShadow: '0px 0px 10px 0.5px #853491' }}>
+            <p className='text-xs text-[#853491]'>
+              Top Up E-wallet & E-money
+            </p>
+          </div>
+        </div>
+
         <div className='bg-white p-3 flex flex-col gap-4 rounded-[20px] drop-shadow-xl mt-4'>
           <p className='text-sm text-[#853491] font-bold tracking-[.2px]'>
             Sering ditanyakan
           </p>
 
-          <FAQ type="celengan" />
+          <FAQ type="amarthalink" />
         </div>
 
         <div className="mt-6 mb-8">

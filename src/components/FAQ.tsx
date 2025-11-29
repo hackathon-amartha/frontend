@@ -13,7 +13,7 @@ export interface FAQItem {
   answer: string;
 }
 
-export type FAQType = "celengan" | "modal" | "amartha";
+export type FAQType = "celengan" | "modal" | "amartha" | "amarthalink";
 
 const faqDataMap: Record<FAQType, FAQItem[]> = {
   celengan: [
@@ -80,6 +80,25 @@ const faqDataMap: Record<FAQType, FAQItem[]> = {
       question: "Bagaimana cara menghubungi customer service Amartha?",
       answer:
         "Anda dapat menghubungi customer service kami melalui fitur chat di aplikasi, email ke cs@amartha.com, atau telepon ke hotline kami yang tersedia 24/7.",
+    },
+  ],
+  amarthalink: [
+    {
+      id: "amarthalink-1",
+      question: "Apa syarat menjadi AmarthaLink?",
+      answer: "Semua orang bisa menjadi AmarthaLink.",
+    },
+    {
+      id: "amarthalink-2",
+      question: "Siapa saja yang bisa menjadi AmarthaLink?",
+      answer:
+        "Tidak ada syarat khusus menjadi AmarthaLink dan pendaftaran GRATIS! Anda bisa langsung mengunduh aplikasi AmarthaFin di Playstore atau Appstore, dan langsung mendaftarkan diri.",
+    },
+    {
+      id: "amarthalink-3",
+      question: "Apa perbedaan antara AmarthaOne dan AmarthaLink?",
+      answer:
+        "Sejak Oktober 2024, AmarthaOne telah berubah nama menjadi AmarthaLink. Tidak ada perubahan fitur ataupun perubahan dari ketersediaan produk, semua yang tersedia di AmarthaOne, tersedia juga di AmarthaLink.",
     },
   ],
 };
