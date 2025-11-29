@@ -1,8 +1,25 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import { Skeleton } from "@/components/ui/skeleton";
+
+const PRODUCT_LINKS: Record<string, string> = {
+  "Celengan": "/dashboard/celengan",
+  "AmarthaLink": "/dashboard/amartha-link",
+  "Amartha Link": "/dashboard/amartha-link",
+  "Modal": "/dashboard/modal",
+};
+
+function transformProductLinks(content: string): string {
+  let result = content;
+  for (const [keyword, href] of Object.entries(PRODUCT_LINKS)) {
+    const regex = new RegExp(`\\b${keyword}\\b`, "g");
+    result = result.replace(regex, `[${keyword}](${href})`);
+  }
+  return result;
+}
 
 interface Message {
   id: string;
@@ -116,7 +133,22 @@ export function ChatMessages({ messages, isLoading }: ChatMessagesProps) {
                 ? "text-white prose-p:text-white prose-headings:text-white prose-strong:text-white prose-li:text-white prose-code:text-white prose-code:bg-white/20 prose-pre:bg-white/20"
                 : "text-black prose-p:text-black prose-headings:text-black prose-strong:text-black prose-li:text-black prose-code:text-black prose-code:bg-black/10 prose-pre:bg-black/10"
             }`}>
-              <ReactMarkdown>{message.content}</ReactMarkdown>
+              <ReactMarkdown
+                components={{
+                  a: ({ href, children }) => (
+                    <Link
+                      href={href || "#"}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline font-medium hover:opacity-80"
+                    >
+                      {children}
+                    </Link>
+                  ),
+                }}
+              >
+                {transformProductLinks(message.content)}
+              </ReactMarkdown>
               {message.isStreaming && (
                 <span className="inline-block w-1.5 h-4 ml-1 bg-current animate-pulse" />
               )}
